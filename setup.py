@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='elasticsearch-prometheus',
-    version='0.1',
+    version='0.1.post1',
     packages=['elasticsearch-prometheus',],
     license='apache2',
     long_description=open('README').read(),
@@ -13,4 +13,5 @@ setup(
     url='https://github.com/wesparish/elasticsearch-prometheus',
     author='Wes Parish',
     author_email='wes@elastiscale.net',
+    scripts=['elasticsearch-prometheus/elasticsearch-prometheus.py'],
 )
