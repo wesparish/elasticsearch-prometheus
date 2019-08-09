@@ -22,12 +22,14 @@ def get_by_path(root, items):
 
 @ES_QUERY_TIME.time()
 def query_elasticsearch():
+  es_search_body = os.getenv('ES_SEARCH_BODY', '{"query":{"range":{"@timestamp":{"gt":"now-5m"}}},"aggs":{"avg_temp":{"avg":{"field":"temp"}}}}')
   search_results = es.search(
             index=os.getenv('ES_SEARCH_INDEX', 'tempsensor-*'),
             # https://jsonlint.com/?reformat=compress
-            body=os.getenv('ES_SEARCH_BODY', '{"query":{"range":{"@timestamp":{"gt":"now-15m"}}},"aggs":{"avg_temp":{"avg":{"field":"temp"}}}}'))
+            body=es_search_body)
   query_results = get_by_path(search_results, os.getenv('ES_SEARCH_RESULT_FIELD_PATH', 'aggregations.avg_temp.value').split('.'))
   ELASTICSEARCH_QUERY_RESULTS.set(query_results)
+  print("es_search_body: %s" % (es_search_body))
   print("%s: %s" % (os.getenv('ELASTICSEARCH_QUERY_RESULTS_NAME', 'elasticsearch_query_results'), query_results))
 
 if __name__ == '__main__':

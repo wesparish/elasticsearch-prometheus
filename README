@@ -22,7 +22,7 @@ ES_SEARCH_INDEX
 Elasticsearch search index (default: tempsensor-\*)
 
 ES_SEARCH_BODY
-Elasticsearch search body (default: '{"query":{"range":{"@timestamp":{"gt":"now-15m"}}},"aggs":{"avg_temp":{"avg":{"field":"temp"}}}}')
+Elasticsearch search body (default: '{"query":{"range":{"@timestamp":{"gt":"now-5m"}}},"aggs":{"avg_temp":{"avg":{"field":"temp"}}}}')
 
 ES_SEARCH_RESULT_FIELD_PATH
 Dot-separated path to index result JSON for single-value to store in ELASTICSEARCH_QUERY_RESULTS gauge (default: 'aggregations.avg_temp.value')

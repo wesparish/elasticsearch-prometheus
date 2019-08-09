@@ -1,9 +1,9 @@
-FROM ubuntu:18.04
-
-RUN apt-get update && \
-    apt-get install -y python-pip
+FROM python:3-alpine
 
 COPY dist /dist
 
-CMD ['elasticsearch-prometheus.py']
+RUN pip install /dist/elasticsearch-prometheus*.tar.gz
 
+CMD ["/usr/local/bin/python", \
+     "-u", \
+     "/usr/local/bin/elasticsearch-prometheus.py"]
