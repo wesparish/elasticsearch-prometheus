@@ -16,12 +16,17 @@ help: ## This help.
 build: ## Build the python module
 	python setup.py sdist
 
-buildcontainer: ## Build the docker container with the latest sdist
+buildcontainer: build ## Build the docker container with the latest sdist
+	rm -rf docker/dist
 	cp -r dist docker/dist
 	cd docker && $(MAKE) build
 
+publishcontainer: buildcontainer ## Publish container to dockerhub
+	cd docker && $(MAKE) publish
+
 clean: ## Remove build artifacts
 	rm -rf dist
+	rm -rf docker/dist
 
 upload: build ## Publish to pypi
 	twine upload dist/*

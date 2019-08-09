@@ -2,7 +2,7 @@ from distutils.core import setup
 
 setup(
     name='elasticsearch-prometheus',
-    version='0.1.post1',
+    version='0.2.1',
     packages=['elasticsearch-prometheus',],
     license='apache2',
     long_description=open('README').read(),
